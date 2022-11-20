@@ -6,7 +6,7 @@ The reason Hospital Clinic Solutions has decided to focus on this management sys
 
 As the main focus of our database is to store information regarding hospital staff and Patient records, we will not be able to use real Doctor-Patient data as it would violate HIPAA rules. Under HIPAA, which stands for "Health Insurance Portability and Accountability Act of 1996," sensitive Patient health information is protected from being disclosed without the Patient's knowledge or consent. This limitation requires us to generate our own data  for the system. As a solution, we have decided to employ the Python package ‘Faker’ which we can use to generate fake data to export into a CSV file. We can then take that CSV file and import it into the different Entity tables through MYSQL workbench, which will generate the necessary SQL script to apply to the database. Retro and Aren will be in charge of this task.
 
-Business Rules
+## Business Rules
 
 
 Patients can be under the care of only one Doctor
