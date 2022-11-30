@@ -11,19 +11,13 @@ As the main focus of our database is to store information regarding hospital sta
 
 Patients can be under the care of only one Doctor
 
-Nurses are assigned to multiple Patients.
-
 Doctors can have one or more Patients
 
 When Doctor writes into Medical Record, both assigned Nurse and Patient receive access to medical record
 
-Nurse is able to add extra information to Medical Record, but is not able to overwrite nor edit Doctors notes
-
 Nurses can set up future appointments on orders of the Doctor
 
 Patient can reschedule or request appointment
-
-Payments are made through Receptionists
 
 Rooms can hold multiple Patients
 
@@ -31,12 +25,6 @@ Each Room is assigned one Nurse
 
 Patients have read-only access to Medical Records
 
-Doctors can make multiple Diagnosis per Patient
-
-Nurses cannot make Diagnoses
-
-Doctors can assign Treatments
-
-Nurses cannot assign Treatments
+Doctors can assign Prescription
 
 Payments are made to Bills
