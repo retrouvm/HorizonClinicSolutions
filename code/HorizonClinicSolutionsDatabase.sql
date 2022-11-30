@@ -46,7 +46,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,'2004-11-15','09:30:00',1,100,19716863,36678030),(2,'2004-11-16','11:00:00',3,100,30604081,46750067);
+INSERT INTO `appointment` VALUES (1,'2004-11-15','09:30:00',45,100,19716863,36678030),(2,'2004-11-16','11:00:00',3,100,30604081,46750067);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,6 +213,34 @@ INSERT INTO `medicine` VALUES (1,'Augmentin 625 Duo Tablet',223,'strip of 10 tab
 UNLOCK TABLES;
 
 --
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `messages` (
+  `idmessage` int NOT NULL AUTO_INCREMENT,
+  `message` varchar(100) NOT NULL DEFAULT 'empty message',
+  `idpatient` bigint NOT NULL,
+  PRIMARY KEY (`idmessage`),
+  UNIQUE KEY `idmessage_UNIQUE` (`idmessage`),
+  UNIQUE KEY `idpatient_UNIQUE` (`idpatient`),
+  CONSTRAINT `patient_message` FOREIGN KEY (`idpatient`) REFERENCES `patients` (`SSN`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `messages`
+--
+
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+INSERT INTO `messages` VALUES (2,'Hi Retro Manishimwe, please pay your bill.',12345678);
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `nurse`
 --
 
@@ -295,7 +323,7 @@ CREATE TABLE `patients` (
   PRIMARY KEY (`SSN`),
   UNIQUE KEY `SSN_UNIQUE` (`SSN`),
   KEY `zip_patients_idx` (`Zip`),
-  CONSTRAINT `zipcode_patient` FOREIGN KEY (`Zip`) REFERENCES `patients_zip` (`zip`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `zipcode_patient` FOREIGN KEY (`Zip`) REFERENCES `patients_zip` (`zip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -305,7 +333,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (19716863,'Christina Willis DDS',71062,'63','783-413-6687x335',300),(30604081,'William Little',25383,'63','447-214-4046x23497',150),(48912965,'Steven Rodriguez',19755,'56','172-500-9574x97598',NULL),(59330375,'Taylor Turner',2588,'51','851-236-0060',NULL),(68405823,'Charles Baird',99508,'77','+1-403-391-8569x4315',NULL),(83778742,'Kristy Patterson',61716,'31','+1-520-037-0478x303',NULL),(111766018,'Sharon Barker',89792,'72','256-153-5175',NULL),(116487686,'Ms. Brandi Mosley',4291,'33','001-970-096-1689x799',NULL),(130170030,'Catherine Vasquez',38307,'62','001-416-514-1456x6114',132),(143807289,'Cassie Giles',70005,'20','+1-111-511-4920x8625',NULL),(150341068,'Megan Kelly',21750,'46','+1-495-042-8646x524',NULL),(152444517,'Jason Elliott',36502,'61','(409)190-1144',NULL),(164981179,'Ashley Short',7745,'33','+1-268-454-9134x65847',NULL),(187893226,'Gina White',32808,'53','769.129.3717x323',NULL),(256023551,'Lisa Jackson',61613,'21','001-587-762-3459x37125',NULL),(314231282,'Brandon Nicholson',38455,'46','(674)228-7542x2606',NULL),(320885191,'John Gonzalez',51971,'59','025.759.1174x551',NULL),(322268835,'Mary Conley',78625,'67','826.235.8124',NULL),(340399882,'Gregory Pineda',20030,'24','+1-300-724-6469x7588',NULL),(349665942,'Elaine Bell',99780,'77','(121)750-4569x91207',NULL),(353665813,'Dan Robbins',55979,'42','181-107-8737x4264',NULL),(370542720,'Donald Roberts',99012,'46','508-813-0599x778',NULL),(375499479,'Peter White',84571,'55','001-403-825-1965',NULL),(393390354,'Kara Ayala',57019,'37','(174)972-7149',NULL),(418362984,'Toni Barker',59196,'69','679-862-3272',NULL),(444123416,'Edward Hunt',20017,'55','885.881.8976x396',NULL),(493612886,'Luis Mayer',20024,'54','001-997-999-9307x83153',NULL),(496210796,'Kimberly Nguyen',36583,'65','798.018.4155',NULL),(538337584,'Gregory Crane',45383,'37','+1-791-834-1941x646',NULL),(557149404,'Jason Thomas',93027,'37','+1-141-644-7440',NULL),(601019765,'Thomas Thompson',50317,'59','902-970-8775x03807',NULL),(638335875,'Amanda Yang',68118,'32','961.848.5627x51709',NULL),(639261951,'Karen Kelley',57410,'78','(266)870-3741x81873',NULL),(642205068,'Janet Nguyen',71617,'21','439-269-8714x60336',NULL),(665072570,'Felicia Clark',1304,'57','(929)058-1070',NULL),(695915537,'Joanna Diaz',56268,'25','322-836-1663',NULL),(714413028,'Blake Lambert',80547,'41','033.127.7774x810',NULL),(720701509,'Julie Moore',38874,'22','630-674-2588x9679',NULL),(768466624,'Sharon Nelson',60623,'35','366-216-3326x7260',NULL),(774327573,'Gregory Bates',55622,'42','951-156-2550',NULL),(793282718,'Robert Kelly',26575,'74','(098)418-5517x61231',NULL),(815898685,'David Curtis',38631,'50','001-397-001-1525',NULL),(839407877,'Ivan Nash',96810,'75','+1-987-048-0260',NULL),(862027420,'Victoria Petty',80581,'77','(420)826-1087',NULL),(881380601,'Tracey Pierce',52330,'28','750-709-3444',NULL),(889996381,'Donald Harrison',40573,'50','+1-879-502-6497x88383',NULL),(890326239,'Christopher Watson',68107,'68','811.910.1748',NULL),(893013432,'Kimberly Shaw',19787,'42','201-861-7613',NULL),(894224740,'Amanda Torres',90606,'40','+1-811-866-1448x760',NULL),(898873356,'William Baldwin',85839,'19','7478984424',NULL);
+INSERT INTO `patients` VALUES (12345678,'Retro Manishimwe',0,NULL,NULL,NULL),(19716863,'Christina Willis DDS',71062,'63','783-413-6687x335',300),(30604081,'William Little',25383,'63','447-214-4046x23497',150),(48912965,'Steven Rodriguez',19755,'56','172-500-9574x97598',NULL),(59330375,'Taylor Turner',2588,'51','851-236-0060',NULL),(68405823,'Charles Baird',99508,'77','+1-403-391-8569x4315',NULL),(83778742,'Kristy Patterson',61716,'31','+1-520-037-0478x303',NULL),(111766018,'Sharon Barker',89792,'72','256-153-5175',NULL),(116487686,'Ms. Brandi Mosley',4291,'33','001-970-096-1689x799',NULL),(130170030,'Catherine Vasquez',38307,'62','001-416-514-1456x6114',132),(143807289,'Cassie Giles',70005,'20','+1-111-511-4920x8625',NULL),(150341068,'Megan Kelly',21750,'46','+1-495-042-8646x524',NULL),(152444517,'Jason Elliott',36502,'61','(409)190-1144',NULL),(164981179,'Ashley Short',7745,'33','+1-268-454-9134x65847',NULL),(187893226,'Gina White',32808,'53','769.129.3717x323',NULL),(256023551,'Lisa Jackson',61613,'21','001-587-762-3459x37125',NULL),(314231282,'Brandon Nicholson',38455,'46','(674)228-7542x2606',NULL),(320885191,'John Gonzalez',51971,'59','025.759.1174x551',NULL),(322268835,'Mary Conley',78625,'67','826.235.8124',NULL),(340399882,'Gregory Pineda',20030,'24','+1-300-724-6469x7588',NULL),(349665942,'Elaine Bell',99780,'77','(121)750-4569x91207',NULL),(353665813,'Dan Robbins',55979,'42','181-107-8737x4264',NULL),(370542720,'Donald Roberts',99012,'46','508-813-0599x778',NULL),(375499479,'Peter White',84571,'55','001-403-825-1965',NULL),(393390354,'Kara Ayala',57019,'37','(174)972-7149',NULL),(418362984,'Toni Barker',59196,'69','679-862-3272',NULL),(444123416,'Edward Hunt',20017,'55','885.881.8976x396',NULL),(493612886,'Luis Mayer',20024,'54','001-997-999-9307x83153',NULL),(496210796,'Kimberly Nguyen',36583,'65','798.018.4155',NULL),(538337584,'Gregory Crane',45383,'37','+1-791-834-1941x646',NULL),(557149404,'Jason Thomas',93027,'37','+1-141-644-7440',NULL),(601019765,'Thomas Thompson',50317,'59','902-970-8775x03807',NULL),(638335875,'Amanda Yang',68118,'32','961.848.5627x51709',NULL),(639261951,'Karen Kelley',57410,'78','(266)870-3741x81873',NULL),(642205068,'Janet Nguyen',71617,'21','439-269-8714x60336',NULL),(665072570,'Felicia Clark',1304,'57','(929)058-1070',NULL),(695915537,'Joanna Diaz',56268,'25','322-836-1663',NULL),(714413028,'Blake Lambert',80547,'41','033.127.7774x810',NULL),(720701509,'Julie Moore',38874,'22','630-674-2588x9679',NULL),(768466624,'Sharon Nelson',60623,'35','366-216-3326x7260',NULL),(774327573,'Gregory Bates',55622,'42','951-156-2550',NULL),(793282718,'Robert Kelly',26575,'74','(098)418-5517x61231',NULL),(815898685,'David Curtis',38631,'50','001-397-001-1525',NULL),(839407877,'Ivan Nash',96810,'75','+1-987-048-0260',NULL),(862027420,'Victoria Petty',80581,'77','(420)826-1087',NULL),(881380601,'Tracey Pierce',52330,'28','750-709-3444',NULL),(889996381,'Donald Harrison',40573,'50','+1-879-502-6497x88383',NULL),(890326239,'Christopher Watson',68107,'68','811.910.1748',NULL),(893013432,'Kimberly Shaw',19787,'42','201-861-7613',NULL),(894224740,'Amanda Torres',90606,'40','+1-811-866-1448x760',NULL),(898873356,'William Baldwin',85839,'19','7478984424',NULL);
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,7 +359,7 @@ CREATE TABLE `patients_zip` (
 
 LOCK TABLES `patients_zip` WRITE;
 /*!40000 ALTER TABLE `patients_zip` DISABLE KEYS */;
-INSERT INTO `patients_zip` VALUES (1304,'Sarahbury','KS','2447 Holmes Way Apt. 024'),(2588,'West Edwinville','WI','86383 Sara Turnpike'),(4291,'North Karenport','OH','594 Steven Lake Apt. 004'),(7745,'Lake Christina','AR','19308 Donna Summit Apt. 409'),(19755,'East Richardside','OR','34511 Hammond Light'),(19787,'West Kevin','AS','1834 Black Dale'),(20017,'Rebeccaland','AZ','6155 Herman Mountain Suite 270'),(20024,'Lake Eric','MO','30760 Jonathan Lodge Suite 400'),(20030,'South James','TX','2430 Kemp Key'),(21750,'North Kenneth','GU','22156 Hernandez Glens'),(25383,'Parkertown','AK','40260 Patel Harbor Apt. 703'),(26575,'Lauraland','NV','7622 Diana Corner'),(32808,'Ricebury','CO','6254 Ali Lake Apt. 993'),(36502,'Williamschester','AK','030 Regina Freeway Suite 567'),(36583,'South Michaelland','AS','0509 Palmer Parkway'),(38307,'Johnville','ID','5502 Hernandez Roads Suite 889'),(38455,'Reynoldsburgh','VA','76012 Garcia Stravenue'),(38631,'North Kimshire','AK','4605 Vasquez Heights Apt. 701'),(38874,'West Elizabeth','MT','43488 Duran Turnpike'),(40573,'Grayhaven','CO','91247 Isaac Ferry'),(45383,'South Kathleenport','RI','18800 Brent Curve Suite 649'),(50317,'Lake Kristinmouth','NJ','0077 David Skyway Suite 473'),(51971,'East Josephville','WI','5309 Morales Divide'),(52330,'West Patrick','OR','148 Crystal Divide'),(55622,'Davidtown','TN','064 Lisa Light'),(55979,'Jamesmouth','SD','1422 Jimenez Islands'),(56268,'North Stephanieberg','NY','30931 Buck Squares'),(57019,'Robertland','KY','1100 James Canyon'),(57410,'Brooksville','PR','2907 Lisa Shoal'),(59196,'Longtown','NC','05616 Williams Ville'),(60623,'Fitzgeraldburgh','WI','82913 Scott Knolls'),(61613,'East Matthewside','MP','27875 Ronald Plains Apt. 134'),(61716,'Port Katiestad','MP','679 Amanda Union Suite 590'),(68107,'Gwendolynside','NH','183 Russell Valley Suite 997'),(68118,'West Justin','AS','4766 Caitlin Green'),(70005,'Nguyenside','IL','692 Ryan Island'),(71062,'West Curtisland','NY','9682 Robin Inlet Suite 381'),(71617,'Foleybury','MT','57789 Lauren Lane Apt. 189'),(78625,'East Diana','NJ','80860 Shirley Meadow Apt. 117'),(80547,'Larsentown','GA','00889 Ayers Stravenue Apt. 371'),(80581,'South Patricia','MP','3169 Joshua Park'),(84571,'East Mario','NE','7146 Anderson Plain'),(85839,'Butlerchester','NC','96534 Arias Squares'),(89792,'North Lisastad','SC','86253 Howard Estates'),(90606,'North Cynthia','AL','18973 Mcdowell Neck'),(93027,'South Zachary','MS','6347 Kevin Alley Suite 947'),(96810,'Mcintoshbury','AR','96407 Shawn Springs'),(99012,'Jacobtown','PA','5067 Wu River Suite 577'),(99508,'West Jaimemouth','AK','427 Campbell Street Suite 232'),(99780,'West Rickyland','IL','779 Dale Via');
+INSERT INTO `patients_zip` VALUES (1304,'Sarahbury','KS','2447 Holmes Way Apt. 024'),(2588,'West Edwinville','WI','86383 Sara Turnpike'),(4291,'North Karenport','OH','594 Steven Lake Apt. 004'),(7745,'Lake Christina','AR','19308 Donna Summit Apt. 409'),(19755,'East Richardside','OR','34511 Hammond Light'),(19787,'West Kevin','AS','1834 Black Dale'),(20017,'Rebeccaland','AZ','6155 Herman Mountain Suite 270'),(20024,'Lake Eric','MO','30760 Jonathan Lodge Suite 400'),(20030,'South James','TX','2430 Kemp Key'),(21750,'North Kenneth','GU','22156 Hernandez Glens'),(25383,'Parkertown','AK','40260 Patel Harbor Apt. 703'),(26575,'Lauraland','NV','7622 Diana Corner'),(32808,'Ricebury','CO','6254 Ali Lake Apt. 993'),(36502,'Williamschester','AK','030 Regina Freeway Suite 567'),(36583,'South Michaelland','AS','0509 Palmer Parkway'),(38307,'Johnville','ID','5502 Hernandez Roads Suite 889'),(38455,'Reynoldsburgh','VA','76012 Garcia Stravenue'),(38631,'North Kimshire','AK','4605 Vasquez Heights Apt. 701'),(38874,'West Elizabeth','MT','43488 Duran Turnpike'),(40573,'Grayhaven','CO','91247 Isaac Ferry'),(45383,'South Kathleenport','RI','18800 Brent Curve Suite 649'),(50317,'Lake Kristinmouth','NJ','0077 David Skyway Suite 473'),(51971,'East Josephville','WI','5309 Morales Divide'),(52330,'West Patrick','OR','148 Crystal Divide'),(55622,'Davidtown','TN','064 Lisa Light'),(55979,'Jamesmouth','SD','1422 Jimenez Islands'),(56268,'North Stephanieberg','NY','30931 Buck Squares'),(57019,'Robertland','KY','1100 James Canyon'),(57410,'Brooksville','PR','2907 Lisa Shoal'),(59196,'Longtown','NC','05616 Williams Ville'),(60623,'Fitzgeraldburgh','WI','82913 Scott Knolls'),(61613,'East Matthewside','MP','27875 Ronald Plains Apt. 134'),(61716,'Port Katiestad','MP','679 Amanda Union Suite 590'),(68107,'Gwendolynside','NH','183 Russell Valley Suite 997'),(68118,'West Justin','AS','4766 Caitlin Green'),(70005,'Nguyenside','IL','692 Ryan Island'),(71062,'West Curtisland','NY','9682 Robin Inlet Suite 381'),(71617,'Foleybury','MT','57789 Lauren Lane Apt. 189'),(78249,'San Antonio','TX','1 UTSA Circle'),(78625,'East Diana','NJ','80860 Shirley Meadow Apt. 117'),(80547,'Larsentown','GA','00889 Ayers Stravenue Apt. 371'),(80581,'South Patricia','MP','3169 Joshua Park'),(84571,'East Mario','NE','7146 Anderson Plain'),(85839,'Butlerchester','NC','96534 Arias Squares'),(89792,'North Lisastad','SC','86253 Howard Estates'),(90606,'North Cynthia','AL','18973 Mcdowell Neck'),(93027,'South Zachary','MS','6347 Kevin Alley Suite 947'),(96810,'Mcintoshbury','AR','96407 Shawn Springs'),(99012,'Jacobtown','PA','5067 Wu River Suite 577'),(99508,'West Jaimemouth','AK','427 Campbell Street Suite 232'),(99780,'West Rickyland','IL','779 Dale Via');
 /*!40000 ALTER TABLE `patients_zip` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,7 +389,7 @@ CREATE TABLE `prescription` (
 
 LOCK TABLES `prescription` WRITE;
 /*!40000 ALTER TABLE `prescription` DISABLE KEYS */;
-INSERT INTO `prescription` VALUES (1,1,19716863),(4,5,130170030),(6,100,83778742);
+INSERT INTO `prescription` VALUES (1,1,19716863),(4,75,130170030),(6,100,83778742);
 /*!40000 ALTER TABLE `prescription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,6 +404,7 @@ CREATE TABLE `report` (
   `idreport` int NOT NULL AUTO_INCREMENT,
   `idpatient` bigint NOT NULL,
   `idbill` int DEFAULT NULL,
+  `feedback` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idreport`),
   KEY `patient_report_idx` (`idpatient`),
   KEY `bill_report_idx` (`idbill`),
@@ -390,7 +419,7 @@ CREATE TABLE `report` (
 
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
-INSERT INTO `report` VALUES (1,19716863,1),(2,130170030,2);
+INSERT INTO `report` VALUES (1,19716863,1,NULL),(2,130170030,2,NULL);
 /*!40000 ALTER TABLE `report` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +432,7 @@ DROP TABLE IF EXISTS `room`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
   `idroom` int NOT NULL AUTO_INCREMENT,
-  `roomstatus` varchar(45) NOT NULL DEFAULT 'Not Full',
+  `roomstatus` varchar(45) DEFAULT NULL,
   `idpatient1` bigint DEFAULT NULL,
   `idpatient2` bigint DEFAULT NULL,
   `idpatient3` bigint DEFAULT NULL,
@@ -422,7 +451,7 @@ CREATE TABLE `room` (
   CONSTRAINT `room_patient2` FOREIGN KEY (`idpatient2`) REFERENCES `patients` (`SSN`),
   CONSTRAINT `room_patient3` FOREIGN KEY (`idpatient3`) REFERENCES `patients` (`SSN`),
   CONSTRAINT `room_patient4` FOREIGN KEY (`idpatient4`) REFERENCES `patients` (`SSN`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -431,7 +460,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'not full',19716863,111766018,NULL,NULL,81609252),(2,'full',59330375,48912965,30604081,68405823,169815215);
+INSERT INTO `room` VALUES (1,'Not Full',19716863,111766018,NULL,NULL,81609252),(2,'Full',59330375,48912965,30604081,68405823,169815215),(5,'Full',187893226,340399882,375499479,444123416,303528226);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -550,4 +579,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 17:17:18
+-- Dump completed on 2022-11-30  1:47:33
