@@ -1,4 +1,4 @@
-# HorizonClinicSolutions
+# Horizon Clinic Solutions
 
 Horizon Clinic Solutions is a team that aims to create a hospital management database system in which Doctors and Nurses are able to detail events within appointments with their Patients. Our hope is to eventually integrate this database system within a UI design that allows users, such as Doctors, Nurses, and Patients, to be verified and given access to their specific profile. We intend to set up a login page that takes credentials, and goes through a server to cross reference with the existing database. If the credentials match an existing user, they will be taken to their profile, if they don't exist, they will be prompted to enter their information and credentials to be stored into the database for future reference.
 
